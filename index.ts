@@ -18,21 +18,21 @@ function convertValue (v: any, type: string) {
 		}
 	}
 	else {
-		return v;
+		return ""+v;
 	}
 }
 
 function parseDataAndSave (data: any, file: string) {
 	let json_data: any = {};
 	let keys = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'x', 'Y', 'Z', ];
-	let index = 3;
+	let index = 4;
 	while (data.hasOwnProperty('A'+index)) {
 		let item: any = {};
 		for (let i = 0; i < keys.length; ++i) {
 			let key = keys[i];
-			if (!data[key+1]) { continue; }
-			let name = data[key+1].v;
-			let type = data[key+2].v;
+			if (!data[key+1] && !data[key+2]) { continue; }
+			let name = data[key+2].v;
+			let type = data[key+3].v;
 			let value = data[key+index].v;
 			item[name] = convertValue(value, type)
 		}
